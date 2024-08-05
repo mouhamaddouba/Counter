@@ -1,7 +1,17 @@
 // ignore_for_file: unnecessary_overrides
+import 'dart:async';
+
+import 'package:counter/source/core/routes/app_routes.dart';
+import 'package:counter/source/views/connect/connect_page.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SplashViewModel extends GetxController {
+class SplashViewModel extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late AnimationController scaleController;
+  late Animation<double> scaleAnimation;
+
   ///region Constructors
   SplashViewModel();
 
@@ -14,6 +24,7 @@ class SplashViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    animatedSplash();
   }
 
   @override
@@ -23,6 +34,7 @@ class SplashViewModel extends GetxController {
 
   @override
   void onClose() {
+    scaleController.dispose();
     super.onClose();
   }
 
@@ -34,6 +46,37 @@ class SplashViewModel extends GetxController {
   ///endregion Lifecycle
 
   ///region Public functions
+  void animatedSplash() {
+    scaleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    )..addStatusListener(
+        (status) {
+          if (status == AnimationStatus.completed) {
+            Get.offAllNamed(
+              AppRoutes.connect,
+            );
+
+            Timer(
+              const Duration(milliseconds: 300),
+              () {
+                scaleController.reset();
+              },
+            );
+          }
+        },
+      );
+
+    scaleAnimation =
+        Tween<double>(begin: 0.0, end: 12).animate(scaleController);
+
+    Timer(
+      const Duration(seconds: 2),
+      () {
+        scaleController.forward();
+      },
+    );
+  }
 
   ///endregion Public functions
 }

@@ -61,6 +61,11 @@ dependencies:
   cached_network_image: ^3.3.1
   flutter_cache_manager: ^3.3.2
 
+  # Animation
+  animated_text_kit: ^4.2.2
+  page_transition: ^2.1.0
+  flutter_staggered_animations: ^1.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

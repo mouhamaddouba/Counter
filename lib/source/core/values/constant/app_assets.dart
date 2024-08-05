@@ -12,6 +12,7 @@ abstract class AppAssets {
 
   ///region Svgs
   static const String logo = '$_svgs/counter.svg';
+  static const String logoApp = '$_svgs/logo_app.svg';
 
   ///region jsons
   static const String bluetooth = '$_jsons/bluetooth.json';
