@@ -1,9 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:counter/source/core/extentions/string_extension.dart';
+import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/view_model/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

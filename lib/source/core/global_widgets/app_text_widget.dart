@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:counter/source/core/global_widgets/app_ripple_widget.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/core/values/constant/app_fonts.dart';
 
 import 'package:flutter/gestures.dart';

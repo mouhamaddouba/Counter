@@ -3,7 +3,7 @@ import 'package:counter/source/core/global_widgets/app_icon_widget.dart';
 import 'package:counter/source/core/global_widgets/app_text_widget.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/core/values/enums/dialog_type_enum.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -190,7 +190,7 @@ class AppAnimationDialogWidget extends StatelessWidget {
                   child: AppTextWidget(
                     message.tr(),
                     textAlign: TextAlign.start,
-                    fontSize: AppDimensions.fontSize16,
+                    fontSize: AppDimensions.fontSize10,
                     fontWeight: FontWeight.w500,
                     textColor: AppColors.black01,
                     maxLines: 10,

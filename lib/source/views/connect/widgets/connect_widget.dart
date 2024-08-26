@@ -1,17 +1,14 @@
-import 'package:counter/source/core/extentions/string_extension.dart';
-import 'package:counter/source/core/global_widgets/app_button_widget.dart';
+import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/global_widgets/app_icon_widget.dart';
 import 'package:counter/source/core/global_widgets/app_text_widget.dart';
 import 'package:counter/source/core/routes/app_routes.dart';
-import 'package:counter/source/core/services/app_connect_services.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:get/get.dart';
 
 class ConnectWidget extends StatelessWidget {
   final BluetoothDevice device;
@@ -29,17 +26,21 @@ class ConnectWidget extends StatelessWidget {
         right: AppDimensions.paddingOrMargin8,
         left: AppDimensions.paddingOrMargin8,
       ),
-      height: 70,
+      height: AppDimensions.height70,
       decoration: BoxDecoration(
         color: AppColors.white01,
         borderRadius: const BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(
+            AppDimensions.radius20,
+          ),
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray02.withOpacity(0.5),
-            blurRadius: 10,
-            spreadRadius: 0,
+            color: AppColors.gray02.withOpacity(
+              AppConstants.opacity0_6,
+            ),
+            blurRadius: AppDimensions.radius10,
+            spreadRadius: AppDimensions.zero,
           ),
         ],
       ),
@@ -50,11 +51,11 @@ class ConnectWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Icon Bluetooth
+            /// Icon Bluetooth
             const AppIconWidget(
+              withBackground: true,
               iconData: Icons.bluetooth,
               color: AppColors.primary900,
-              withBackground: true,
               backgroundColor: AppColors.primary50,
               backgroundRadius: AppDimensions.radius25,
               backgroundSize: AppDimensions.iconSize40,
@@ -63,7 +64,7 @@ class ConnectWidget extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  // Device Platform
+                  /// Device Platform
                   AppTextWidget(
                     device.platformName == AppConstants.emptyText
                         ? AppStrings.unknown.t()
@@ -72,30 +73,29 @@ class ConnectWidget extends StatelessWidget {
                     textColor: AppColors.rgb,
                   ),
 
-                  //space
+                  ///space
                   const SizedBox(
                     height: 6,
                   ),
 
-                  // Device Remote Id
+                  /// Device Remote Id
                   AppTextWidget(
+                    textColor: AppColors.rgb,
                     device.remoteId.toString(),
                     fontSize: AppDimensions.fontSize08,
-                    textColor: AppColors.rgb,
                   ),
                 ],
               ),
             ),
 
-            // text button connect
+            /// text button connect
             AppTextWidget(
               AppStrings.connect.t(),
+              fontWeight: FontWeight.w600,
               textColor: AppColors.primary,
               fontSize: AppDimensions.fontSize12,
-              fontWeight: FontWeight.w600,
               onTap: () {
-                Navigator.pushReplacementNamed(
-                  context,
+                Get.offAllNamed(
                   AppRoutes.home,
                 );
               },

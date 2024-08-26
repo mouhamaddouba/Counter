@@ -1,4 +1,4 @@
-import 'package:counter/source/core/extentions/string_extension.dart';
+import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/global_widgets/app_icon_widget.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';

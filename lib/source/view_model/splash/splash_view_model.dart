@@ -2,7 +2,7 @@
 import 'dart:async';
 
 import 'package:counter/source/core/routes/app_routes.dart';
-import 'package:counter/source/views/connect/connect_page.dart';
+import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,7 +49,9 @@ class SplashViewModel extends GetxController
   void animatedSplash() {
     scaleController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(
+        milliseconds: AppConstants.duration600,
+      ),
     )..addStatusListener(
         (status) {
           if (status == AnimationStatus.completed) {
@@ -58,7 +60,9 @@ class SplashViewModel extends GetxController
             );
 
             Timer(
-              const Duration(milliseconds: 300),
+              const Duration(
+                milliseconds: AppConstants.duration300,
+              ),
               () {
                 scaleController.reset();
               },
@@ -67,11 +71,15 @@ class SplashViewModel extends GetxController
         },
       );
 
-    scaleAnimation =
-        Tween<double>(begin: 0.0, end: 12).animate(scaleController);
+    scaleAnimation = Tween<double>(
+      begin: AppConstants.tween00,
+      end: AppConstants.tween12,
+    ).animate(scaleController);
 
     Timer(
-      const Duration(seconds: 2),
+      const Duration(
+        seconds: AppConstants.duration02,
+      ),
       () {
         scaleController.forward();
       },

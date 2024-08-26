@@ -66,6 +66,12 @@ dependencies:
   page_transition: ^2.1.0
   flutter_staggered_animations: ^1.1.1
 
+  # Grid View
+  flutter_staggered_grid_view: ^0.7.0
+
+  # Neumporphic
+  clay_containers: ^0.3.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

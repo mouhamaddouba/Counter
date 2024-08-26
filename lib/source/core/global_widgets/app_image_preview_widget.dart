@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:photo_view/photo_view.dart';

@@ -1,5 +1,5 @@
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/view_model/connect/connect_view_model.dart';
 import 'package:counter/source/views/connect/widgets/connect_widget.dart';
 import 'package:flutter/material.dart';

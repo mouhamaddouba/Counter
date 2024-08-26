@@ -4,7 +4,7 @@ import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_assets.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/core/values/enums/app_state_render_enum.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

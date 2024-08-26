@@ -1,4 +1,4 @@
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppRippleWidget extends StatelessWidget {

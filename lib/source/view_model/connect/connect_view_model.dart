@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_overrides
 import 'package:counter/source/core/utils/app_permission_utils.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
@@ -52,14 +51,13 @@ class ConnectViewModel extends GetxController
   ///endregion Lifecycle
 
   ///region Public functions
-  ///
-  ///
+
   /// Animate float button by scale
   void animateFloatButton() {
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 500,
+        milliseconds: AppConstants.duration500,
       ),
     );
 
@@ -68,7 +66,10 @@ class ConnectViewModel extends GetxController
       curve: Curves.easeInOut,
     );
 
-    animation = Tween(begin: 0.9, end: 1.1).animate(curve);
+    animation = Tween(
+      begin: AppConstants.tween0_9,
+      end: AppConstants.tween1_1,
+    ).animate(curve);
 
     animationController.repeat(
       reverse: true,
@@ -110,8 +111,6 @@ class ConnectViewModel extends GetxController
       isSearching.value = false;
     }
   }
-
-  ///
 
   ///endregion Public functions
 }

@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:counter/source/core/global_widgets/app_image_preview_widget.dart';
 import 'package:counter/source/core/values/constant/app_assets.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';

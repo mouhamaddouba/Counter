@@ -1,7 +1,7 @@
 import 'package:counter/source/core/global_widgets/app_image_widget.dart';
 import 'package:counter/source/core/global_widgets/app_text_widget.dart';
 import 'package:counter/source/core/values/constant/app_assets.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppNoDataFoundWidget extends StatelessWidget {

@@ -27,14 +27,14 @@ abstract class AppStrings {
   static const String storageAccess =
       'This app needs Storage access for save files  ';
 
-  // Connect page
+  /// Connect page
   static const String bluetoothConnection = 'bluetoothConnection';
   static const String reSearch = 'reSearch';
   static const String unknown = 'unknown';
   static const String connect = 'connect';
   static const String retry = 'retry';
 
-  // Home Page
+  /// Home Page
   static const String bluetoothNotEnabel = 'bluetoothNotEnabel';
   static const String locationAccess = 'locationAccess';
   static const String locationNotEnabel = 'locationNotEnabel';
@@ -67,7 +67,7 @@ abstract class AppStrings {
   static const String firstResetOperation = 'firstResetOperation';
   static const String secondResetOperation = 'secondResetOperation';
 
-  // Settings Page
+  /// Settings Page
   static const String settings = 'settings';
   static const String currentNumber = 'currentNumber';
   static const String totalNumber = 'totalNumber';

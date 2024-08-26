@@ -1,1 +1,0 @@
-import 'package:easy_localization/easy_localization.dart' as locale;extension StringExtension on String {  String t() {    return locale.tr(this);  }}

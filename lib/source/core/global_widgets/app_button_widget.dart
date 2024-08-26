@@ -1,7 +1,7 @@
 import 'package:counter/source/core/global_widgets/app_ripple_widget.dart';
 import 'package:counter/source/core/global_widgets/app_text_widget.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
-import 'package:counter/source/core/values/constant/app_dimentions.dart';
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppButtonWidget extends StatelessWidget {
@@ -49,7 +49,7 @@ class AppButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(
             color: _getBorderColor(),
-            width: AppDimensions.thickness01,
+            width: AppDimensions.thickness02,
           ),
           color: _getColor(),
           borderRadius: BorderRadius.circular(
@@ -76,7 +76,7 @@ class AppButtonWidget extends StatelessWidget {
                 text,
                 textColor: _getTextColor(),
                 fontSize: fontSize,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w500,
               ),
 
               // Space
