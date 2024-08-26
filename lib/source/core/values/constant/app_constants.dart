@@ -1,3 +1,5 @@
+import 'package:counter/source/core/extensions/string_extension.dart';
+import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
@@ -111,5 +113,26 @@ abstract class AppConstants {
     BluetoothDevice(
       remoteId: const DeviceIdentifier("5d:c4:b5:b4:1e:89"),
     ),
+  ];
+
+  static List<String> gateSettingsItems = [
+    AppStrings.off.t(),
+    AppStrings.autoSync.t(),
+    AppStrings.autoDeSync.t(),
+    AppStrings.onPrompt.t(),
+    AppStrings.normal.t(),
+  ];
+
+  static List<String> piecesSizeItems = [
+    AppStrings.custom.t(),
+    AppStrings.auto.t(),
+    AppStrings.manual.t(),
+  ];
+
+  static List<String> piecesAutoItems = [
+    'M1...0.5',
+    'M2...1.0',
+    'M3...1.5',
+    'M4...2.0',
   ];
 }
