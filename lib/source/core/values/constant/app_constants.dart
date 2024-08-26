@@ -31,6 +31,7 @@ abstract class AppConstants {
   static const int duration500 = 500;
   static const int duration600 = 600;
   static const int duration800 = 800;
+  static const int duration1000 = 1000;
   static const int duration1200 = 1200;
   static const int duration2500 = 2500;
 

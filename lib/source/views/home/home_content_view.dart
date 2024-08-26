@@ -28,7 +28,7 @@ class HomeContentView extends GetView<HomeViewModel> {
                 ? AppConstants.opacity01
                 : AppConstants.opacity00,
             duration: const Duration(
-              milliseconds: 600,
+              milliseconds: AppConstants.duration600,
             ),
             child: const SingleChildScrollView(
               child: HomeContentBodyView(),

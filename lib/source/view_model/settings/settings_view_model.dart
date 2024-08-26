@@ -3,7 +3,6 @@ import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 class SettingsViewModel extends GetxController {
   bool isChecked = true;

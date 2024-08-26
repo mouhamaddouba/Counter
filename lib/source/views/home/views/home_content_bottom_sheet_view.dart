@@ -4,6 +4,7 @@ import 'package:counter/source/core/global_widgets/app_button_widget.dart';
 import 'package:counter/source/core/global_widgets/app_icon_widget.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
+import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/view_model/home/home_view_model.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,12 @@ class HomeContentBottomSheetView extends GetView<HomeViewModel> {
       ),
       child: AnimationTransaction(
         alignmentGeometry: Alignment.bottomCenter,
-        delayStart: const Duration(milliseconds: 500),
-        animationDuration: const Duration(milliseconds: 1000),
+        delayStart: const Duration(
+          milliseconds: AppConstants.duration500,
+        ),
+        animationDuration: const Duration(
+          milliseconds: AppConstants.duration1000,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

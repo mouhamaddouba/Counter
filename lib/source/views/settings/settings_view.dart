@@ -103,7 +103,7 @@ class SettingsView extends GetView<SettingsViewModel> {
                   width: AppDimensions.paddingOrMargin8,
                 ),
 
-                // text checkBox
+                /// text checkBox
                 AppTextWidget(
                   AppStrings.applySettings.t(),
                   textColor: AppColors.black01,
