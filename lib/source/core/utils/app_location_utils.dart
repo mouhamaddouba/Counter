@@ -1,14 +1,15 @@
 import 'dart:io';
 
+import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
+import 'package:counter/source/core/values/constant/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AppLocationUtils {
   /// This for check Location permission
-  Future<bool> checkLocationPermission(BuildContext ctx) async {
-    //if IOS app did not work check this code (permission.locationWhenInUse.status)
+  Future<bool> checkLocationPermission() async {
     if (Platform.isWindows) {
       return Future<bool>.value(true);
     }
@@ -18,33 +19,38 @@ class AppLocationUtils {
     } else {
       var status = await Permission.location.status;
 
-      if (ctx.mounted) {
+      if (AppSettings.navigatorKey.currentContext!.mounted) {
         if (status.isDenied ||
             status.isPermanentlyDenied ||
             status.isRestricted) {
-          showDialog(
-            context: ctx,
+          await showDialog(
+            context: AppSettings.navigatorKey.currentContext!,
             builder: (BuildContext context) {
               return CupertinoAlertDialog(
-                title: const Text(AppStrings.locationPermission),
-                content: const Text(
-                  AppStrings.locationAccessConnection,
+                title: Text(
+                  AppStrings.locationPermission.t(),
+                ),
+                content: Text(
+                  AppStrings.thisAppNeedsLocationAccessForBluetoothConnection
+                      .t(),
                 ),
                 actions: <Widget>[
                   CupertinoDialogAction(
-                    child: const Text(
-                      AppStrings.deny,
-                      style: TextStyle(
+                    child: Text(
+                      AppStrings.deny.t(),
+                      style: const TextStyle(
                         color: Colors.redAccent,
                       ),
                     ),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
                   CupertinoDialogAction(
-                    child: const Text(AppStrings.settings),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      openAppSettings();
+                    child: Text(AppStrings.settings.t()),
+                    onPressed: () async {
+                      await openAppSettings();
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ],
@@ -59,10 +65,11 @@ class AppLocationUtils {
     }
 
     return Future<bool>.value(false);
+    //print(status);
   }
 
   /// Check if location is enable
-  Future<bool> locationIsEnable(BuildContext ctx) async {
+  Future<bool> locationIsEnable() async {
     if (Platform.isWindows) {
       return true;
     }

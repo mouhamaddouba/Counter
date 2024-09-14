@@ -72,6 +72,10 @@ dependencies:
   # Neumporphic
   clay_containers: ^0.3.4
 
+  # Remote API
+  dio: ^5.7.0
+  pretty_dio_logger: ^1.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

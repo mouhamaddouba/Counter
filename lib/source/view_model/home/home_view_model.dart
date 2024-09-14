@@ -1,6 +1,6 @@
 // ignore_for_file: unnecessary_overrides
 import 'package:counter/source/core/extensions/string_extension.dart';
-import 'package:counter/source/core/services/app_connect_services.dart';
+import 'package:counter/source/core/services/bluetooth/app_connect_services.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/utils/app_alert_utils.dart';
 import 'package:counter/source/core/utils/app_bluetooth_utils.dart';
@@ -59,7 +59,6 @@ class HomeViewModel extends GetxController {
   Future<void> checkBluetooth(BuildContext context) async {
     bool check = await AppBluetoothUtils().checkBluetooth(
       checkBluetooth,
-      context,
     );
     if (check) {
       appConnectServices.reconnect();

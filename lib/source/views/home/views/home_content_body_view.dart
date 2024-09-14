@@ -4,7 +4,7 @@ import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:counter/source/core/values/constant/app_dimensions.dart';
-import 'package:counter/source/core/values/enums/app_status_enum.dart';
+import 'package:counter/source/core/values/enums/app_enum.dart';
 import 'package:counter/source/core/values/enums/position_border_enum.dart';
 import 'package:counter/source/view_model/home/home_view_model.dart';
 import 'package:counter/source/views/home/widgets/table_border_widget.dart';

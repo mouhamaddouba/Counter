@@ -82,7 +82,6 @@ class ConnectViewModel extends GetxController
       () {
         scanBluetoothDevices(context);
       },
-      context,
     );
     if (check) {
       await FlutterBluePlus.stopScan();

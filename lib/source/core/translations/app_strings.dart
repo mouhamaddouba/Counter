@@ -27,6 +27,30 @@ abstract class AppStrings {
   static const String storageAccess =
       'This app needs Storage access for save files  ';
 
+  /// Services
+  static const String somethingWentWrong = "somethingWentWrong";
+  static const String badRequestError = "badRequestError";
+  static const String conflictError = "conflictError";
+  static const String forbiddenError = "forbiddenError";
+  static const String internalServerError = "Internal Server Error ";
+  static const String notFoundError = "notFoundError";
+  static const String serviceUnavailableError = "serviceUnavailableError";
+  static const String unauthorizedError = "unauthorizedError";
+  static const String noInternetError = "noInternetError";
+  static const String locationIsNotEnable = "locationIsNotEnable";
+  static const String bluetoothIsNotEnable = "bluetoothIsNotEnable";
+  static const String deviceDisconnected = "deviceDisconnected";
+  static const String thisAppNeedsLocationAccessForBluetoothConnection =
+      "thisAppNeedsLocationAccessForBluetoothConnection";
+  static const String thisAppNeedsBluetoothAccessConnection =
+      "thisAppNeedsBluetoothAccessConnection";
+  static const String thisAppNeedsStorageAccessForSaveData =
+      "thisAppNeedsStorageAccessForSaveData";
+  static const String cameraPermission = "cameraPermission";
+  static const String thisAppNeedsCameraAccessForQRScan =
+      "thisAppNeedsCameraAccessForQRScan";
+  static const String tryAgain = "tryAgain";
+
   /// Connect page
   static const String bluetoothConnection = 'bluetoothConnection';
   static const String reSearch = 'reSearch';

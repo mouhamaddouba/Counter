@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
+import 'package:counter/source/core/utils/app_alert_utils.dart';
 import 'package:counter/source/core/utils/app_android_sdk_utils.dart';
+import 'package:counter/source/core/values/constant/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +13,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 class AppBluetoothUtils {
   /// Check permission for bluetooth
-  static Future<bool> checkPermissionBluetooth(BuildContext context) async {
-    int sdkNumber = await AppAndroidSdkUtils().getAndroidSDK(context);
+  Future<bool> checkPermissionBluetooth() async {
+    int sdkNumber = await AppAndroidSdkUtils().getAndroidSDK();
     bool bluetooth = await Permission.bluetooth.request().isGranted;
     bool bluetoothConnect =
         await Permission.bluetoothConnect.request().isGranted;
@@ -31,7 +36,7 @@ class AppBluetoothUtils {
         statusBluetooth = PermissionStatus.granted;
       }
 
-      if (context.mounted) {
+      if (AppSettings.navigatorKey.currentContext!.mounted) {
         if (statusBluetooth.isDenied ||
             statusBluetooth.isPermanentlyDenied ||
             statusBluetooth.isRestricted ||
@@ -41,29 +46,35 @@ class AppBluetoothUtils {
             statusBluetoothScan.isDenied ||
             statusBluetoothScan.isPermanentlyDenied ||
             statusBluetoothScan.isRestricted) {
-          showDialog(
-            context: context,
+          await showDialog(
+            context: AppSettings.navigatorKey.currentContext!,
             builder: (BuildContext context) {
               return CupertinoAlertDialog(
-                title: const Text(AppStrings.bluetoothPermission),
-                content: const Text(AppStrings.accessConnection),
+                title: Text(
+                  AppStrings.bluetoothPermission.t(),
+                ),
+                content: Text(
+                  AppStrings.thisAppNeedsBluetoothAccessConnection.t(),
+                ),
                 actions: <Widget>[
                   CupertinoDialogAction(
-                    child: const Text(
-                      AppStrings.deny,
-                      style: TextStyle(
+                    child: Text(
+                      AppStrings.deny.t(),
+                      style: const TextStyle(
                         color: Colors.redAccent,
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                   CupertinoDialogAction(
-                    child: const Text(AppStrings.settings),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      openAppSettings();
+                    child: Text(
+                      AppStrings.settings.t(),
+                    ),
+                    onPressed: () async {
+                      await openAppSettings();
+                      if (context.mounted) {
+                        Navigator.of(context).pop();
+                      }
                     },
                   ),
                 ],
@@ -83,9 +94,19 @@ class AppBluetoothUtils {
   }
 
   /// Check if bluetooth is enable
-  Future<bool> bluetoothIsEnable(BuildContext ctx) async {
+  Future<bool> bluetoothIsEnable() async {
     bool bluetoothIsEnable =
         await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
+    if (Platform.isIOS) {
+      ///To not ask me why but this shit can only work by this way in ios;
+      await Future.delayed(
+        const Duration(
+          milliseconds: 100,
+        ),
+      );
+      bluetoothIsEnable =
+          await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
+    }
     if (kDebugMode) {
       print(
           'bluetoothIsEnable:................................$bluetoothIsEnable');
@@ -98,12 +119,18 @@ class AppBluetoothUtils {
   }
 
   /// Check bluetooth
-  Future<bool> checkBluetooth(Function retry, BuildContext ctx) async {
+  Future<bool> checkBluetooth(Function retry) async {
     bool check = false;
 
-    check = await bluetoothIsEnable(ctx);
+    check = await bluetoothIsEnable();
     if (!check) {
-      if (ctx.mounted) {}
+      if (AppSettings.navigatorKey.currentContext!.mounted) {
+        AppAlertUtils().showAlertDialog(
+          AppStrings.bluetoothIsNotEnable.t(),
+          retry,
+          AppSettings.navigatorKey.currentContext!,
+        );
+      }
       return Future<bool>.value(false);
     }
     return Future<bool>.value(true);

@@ -26,6 +26,7 @@ abstract class AppConstants {
   static const int duration00 = 0;
   static const int duration02 = 2;
   static const int duration15 = 15;
+  static const int duration100 = 100;
   static const int duration150 = 150;
   static const int duration300 = 300;
   static const int duration500 = 500;
@@ -34,6 +35,7 @@ abstract class AppConstants {
   static const int duration1000 = 1000;
   static const int duration1200 = 1200;
   static const int duration2500 = 2500;
+  static const int duration40000 = 40000;
 
   /// Constant offsets
   static const Offset offset10 = Offset(10, 10);
@@ -69,6 +71,22 @@ abstract class AppConstants {
   static const double tween0_9 = 0.9;
   static const double tween1_1 = 1.1;
   static const double tween12 = 12;
+
+  /// Constant code
+  static const int code_1 = -1;
+  static const int code200 = 200;
+  static const int code400 = 400;
+  static const int code401 = 401;
+  static const int code403 = 403;
+  static const int code404 = 404;
+  static const int code409 = 409;
+  static const int code500 = 500;
+  static const int code503 = 503;
+  static const int code601 = 601;
+  static const int code602 = 602;
+  static const int code603 = 603;
+  static const int code604 = 604;
+  static const int code605 = 605;
 
   /// Fake Data
   static List<BluetoothDevice> devicesList = [

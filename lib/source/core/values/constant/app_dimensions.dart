@@ -248,4 +248,5 @@ abstract class AppDimensions {
   ///endregion flex expand
 
   static const double zero = 0.0;
+  static const int zeroInt = 0;
 }

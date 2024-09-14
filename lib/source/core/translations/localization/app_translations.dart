@@ -1,4 +1,4 @@
-import 'package:counter/source/core/values/enums/language_type_enum.dart';
+import 'package:counter/source/core/translations/language_type_enum.dart';
 import 'package:flutter/material.dart';
 
 ///region const translation
