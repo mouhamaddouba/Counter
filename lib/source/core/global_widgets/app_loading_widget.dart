@@ -14,7 +14,8 @@ class AppLoadingWidget extends StatelessWidget {
   final String titleText;
   final String descriptionText;
   final Color textColor;
-  final Color spinColor;
+  final Color? spinColor;
+  final double? spinSize;
   final double fontSize;
   final double height;
 
@@ -27,7 +28,8 @@ class AppLoadingWidget extends StatelessWidget {
     this.titleText = AppConstants.emptyText,
     this.descriptionText = AppConstants.emptyText,
     this.textColor = AppColors.white01,
-    this.spinColor = AppColors.white01,
+    this.spinColor,
+    this.spinSize,
     this.fontSize = AppDimensions.fontSize18,
     this.height = AppDimensions.height200,
   });
@@ -45,8 +47,8 @@ class AppLoadingWidget extends StatelessWidget {
           // Overlay
           isLoading
               ? SpinKitSpinningLines(
-                  color: Theme.of(context).primaryColor,
-                  size: AppDimensions.paddingOrMargin70,
+                  color: spinColor ?? Theme.of(context).primaryColor,
+                  size: spinSize ?? AppDimensions.paddingOrMargin70,
                 )
               : const SizedBox.shrink()
         ],

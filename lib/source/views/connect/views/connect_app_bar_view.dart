@@ -16,22 +16,30 @@ class ConnectAppBarView extends GetView<ConnectViewModel>
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      centerTitle: true,
-      elevation: AppDimensions.zero,
-      backgroundColor: AppColors.primary600,
-      actions: <Widget>[
-        if (controller.isSearching.value) const AppLoadingWidget(),
-      ],
-      iconTheme: const IconThemeData(
-        color: Colors.white,
-      ),
+    return Obx(
+      () {
+        return AppBar(
+          centerTitle: true,
+          elevation: AppDimensions.zero,
+          backgroundColor: AppColors.primary600,
 
-      /// Title App Bar
-      title: AppTextWidget(
-        AppStrings.bluetoothConnection.t(),
-        textColor: AppColors.white01,
-      ),
+          /// Loading search
+          leading: controller.appConnectServices.isSearching.value
+              ? const Center(
+                  child: AppLoadingWidget(
+                    spinColor: AppColors.white01,
+                    spinSize: AppDimensions.paddingOrMargin30,
+                  ),
+                )
+              : const SizedBox.shrink(),
+
+          /// Title App Bar
+          title: AppTextWidget(
+            AppStrings.bluetoothConnection.t(),
+            textColor: AppColors.white01,
+          ),
+        );
+      },
     );
   }
 

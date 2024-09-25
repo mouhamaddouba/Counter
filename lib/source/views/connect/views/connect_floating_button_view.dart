@@ -15,19 +15,24 @@ class ConnectFloatingButtonView extends GetView<ConnectViewModel> {
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: controller.animation,
-      child: FloatingActionButton(
-        tooltip: AppStrings.reSearch.t(),
-        backgroundColor:
-            controller.isSearching.value ? AppColors.gray03 : AppColors.primary,
-        onPressed: controller.isSearching.value
-            ? null
-            : () {
-                controller.scanBluetoothDevices(context);
-              },
-        child: const AppIconWidget(
-          iconData: Icons.search_rounded,
-          color: AppColors.white01,
-        ),
+      child: Obx(
+        () {
+          return FloatingActionButton(
+            tooltip: AppStrings.reSearch.t(),
+            backgroundColor: controller.appConnectServices.isSearching.value
+                ? AppColors.gray03
+                : AppColors.primary,
+            onPressed: controller.appConnectServices.isSearching.value
+                ? null
+                : () {
+                    controller.appConnectServices.scanBluetoothDevices();
+                  },
+            child: const AppIconWidget(
+              iconData: Icons.search_rounded,
+              color: AppColors.white01,
+            ),
+          );
+        },
       ),
     );
   }

@@ -1,6 +1,9 @@
 // ignore_for_file: unnecessary_overrides
+import 'package:counter/source/core/routes/app_routes.dart';
+import 'package:counter/source/core/services/bluetooth/app_connect_services.dart';
 import 'package:counter/source/core/utils/app_permission_utils.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
+import 'package:counter/source/core/values/enums/app_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
@@ -14,6 +17,8 @@ class ConnectViewModel extends GetxController
   late Animation<double> animation;
 
   Animation<double> get animationFloat => animation;
+
+  final AppConnectServices appConnectServices = AppConnectServices();
 
   ///region Constructors
   ConnectViewModel({
@@ -30,6 +35,11 @@ class ConnectViewModel extends GetxController
   @override
   void onInit() {
     animateFloatButton();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      appConnectServices.startScan();
+    });
+
     super.onInit();
   }
 
@@ -40,6 +50,8 @@ class ConnectViewModel extends GetxController
 
   @override
   void onClose() {
+    appConnectServices.readStreamSubscription?.cancel();
+    FlutterBluePlus.stopScan();
     super.onClose();
   }
 
@@ -86,7 +98,7 @@ class ConnectViewModel extends GetxController
     if (check) {
       await FlutterBluePlus.stopScan();
 
-      isSearching.value = true;
+      appConnectServices.isSearching.value = true;
 
       FlutterBluePlus.startScan(
         timeout: const Duration(

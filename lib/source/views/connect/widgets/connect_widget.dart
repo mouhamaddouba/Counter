@@ -6,11 +6,12 @@ import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:counter/source/core/values/constant/app_dimensions.dart';
+import 'package:counter/source/view_model/connect/connect_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
-class ConnectWidget extends StatelessWidget {
+class ConnectWidget extends GetView<ConnectViewModel> {
   final BluetoothDevice device;
 
   const ConnectWidget({
@@ -95,6 +96,7 @@ class ConnectWidget extends StatelessWidget {
               textColor: AppColors.primary,
               fontSize: AppDimensions.fontSize12,
               onTap: () {
+                controller.appConnectServices.connectWithDevice();
                 Get.offAllNamed(
                   AppRoutes.home,
                 );
