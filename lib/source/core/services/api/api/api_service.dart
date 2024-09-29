@@ -33,7 +33,7 @@ class ApiService {
     if (kDebugMode) {
       print(
           "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REQUEST URL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-      // print("${ipUrl ?? ApiUrls.baseUrl}$url");
+
       print(
           "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< REQUEST PARAMETERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       print(queryParameters ?? {});

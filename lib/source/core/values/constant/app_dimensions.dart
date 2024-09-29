@@ -112,6 +112,7 @@ abstract class AppDimensions {
   static const double width290 = 290.0;
   static const double width300 = 300.0;
   static const double width320 = 320.0;
+  static const double width350 = 350.0;
 
   ///endregion width
 

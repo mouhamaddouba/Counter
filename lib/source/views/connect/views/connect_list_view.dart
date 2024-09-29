@@ -2,7 +2,6 @@ import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/view_model/connect/connect_view_model.dart';
 import 'package:counter/source/views/connect/widgets/connect_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
@@ -46,7 +45,11 @@ class ConnectListView extends GetView<ConnectViewModel> {
                   /// design element of list
                   child: ConnectWidget(
                     device: controller.appConnectServices.devicesList[index],
-                    // device: AppConstants.devicesList[index],
+                    onTap: () async {
+                      controller.connectWithDevice(
+                        controller.appConnectServices.devicesList[index],
+                      );
+                    },
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/global_widgets/app_icon_widget.dart';
+import 'package:counter/source/core/global_widgets/app_loading_widget.dart';
 import 'package:counter/source/core/global_widgets/app_text_widget.dart';
 import 'package:counter/source/core/routes/app_routes.dart';
 import 'package:counter/source/core/themes/app_colors.dart';
@@ -7,16 +8,19 @@ import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
 import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:counter/source/view_model/connect/connect_view_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
 class ConnectWidget extends GetView<ConnectViewModel> {
   final BluetoothDevice device;
+  final VoidCallback onTap;
 
   const ConnectWidget({
     super.key,
     required this.device,
+    required this.onTap,
   });
 
   @override
@@ -76,7 +80,7 @@ class ConnectWidget extends GetView<ConnectViewModel> {
 
                   ///space
                   const SizedBox(
-                    height: 6,
+                    height: AppDimensions.height06,
                   ),
 
                   /// Device Remote Id
@@ -90,17 +94,34 @@ class ConnectWidget extends GetView<ConnectViewModel> {
             ),
 
             /// text button connect
-            AppTextWidget(
-              AppStrings.connect.t(),
-              fontWeight: FontWeight.w600,
-              textColor: AppColors.primary,
-              fontSize: AppDimensions.fontSize12,
-              onTap: () {
-                controller.appConnectServices.connectWithDevice();
-                Get.offAllNamed(
-                  AppRoutes.home,
-                );
-              },
+            Obx(
+              () => controller.isTryToConnectToAnotherDevice.value
+                  ? controller.newDevice == device
+                      ? const SizedBox(
+                          height: AppDimensions.height40,
+                          width: AppDimensions.width40,
+                          child: Center(
+                            child: AppLoadingWidget(),
+                          ),
+                        )
+                      : AppTextWidget(
+                          AppStrings.connect.t(),
+                          fontWeight: FontWeight.w600,
+                          textColor: AppColors.gray03,
+                          fontSize: AppDimensions.fontSize12,
+                          onTap: null,
+                        )
+                  : AppTextWidget(
+                      AppStrings.connect.t(),
+                      fontWeight: FontWeight.w600,
+                      textColor: AppColors.primary,
+                      fontSize: AppDimensions.fontSize12,
+                      onTap: () async {
+                        controller.newDevice = device;
+                        onTap();
+                        controller.isTryToConnect.value = true;
+                      },
+                    ),
             )
           ],
         ),

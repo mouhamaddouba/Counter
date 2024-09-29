@@ -1,7 +1,12 @@
+import 'package:counter/source/core/values/constant/app_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
-enum ThemeEnum { system, light, dark }
+enum ThemeEnum {
+  system,
+  light,
+  dark,
+}
 
 class AppTheme {
   /// current os theme
@@ -16,18 +21,7 @@ class AppTheme {
   static final String dark = ThemeEnum.dark.name;
 
   static ThemeData getAppTheme() {
-    // final String prefsTheme = AppPrefs().appTheme;
     return _lightTheme();
-  }
-
-  static bool _isDarkMode() {
-    final darkMode =
-        WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    if (darkMode == Brightness.dark) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   static String getAppThemeMode() {
@@ -48,28 +42,12 @@ class AppTheme {
       ),
       iconTheme: const IconThemeData(
         color: AppColors.darkPrimary,
-        size: 24,
+        size: AppDimensions.iconSize24,
       ),
       checkboxTheme: const CheckboxThemeData(
         side: BorderSide(
           color: AppColors.gray03,
         ),
-      ),
-    );
-  }
-
-  static ThemeData _darkTheme() {
-    return _baseTheme().copyWith(
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: AppColors.gray03,
-      dividerTheme: const DividerThemeData(
-        color: AppColors.white01,
-      ),
-      colorScheme: const ColorScheme.light(
-        surface: AppColors.black01,
-        error: AppColors.errorLight,
-        primary: AppColors.primary,
-        onSurface: AppColors.white01,
       ),
     );
   }

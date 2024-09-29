@@ -1,24 +1,31 @@
-// ignore_for_file: unnecessary_overrides
+import 'dart:async';
+
 import 'package:counter/source/core/routes/app_routes.dart';
 import 'package:counter/source/core/services/bluetooth/app_connect_services.dart';
-import 'package:counter/source/core/utils/app_permission_utils.dart';
+import 'package:counter/source/core/themes/app_colors.dart';
+import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/values/constant/app_constants.dart';
-import 'package:counter/source/core/values/enums/app_enum.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
+import '../../core/values/enums/app_enum.dart';
+
 class ConnectViewModel extends GetxController
     with GetSingleTickerProviderStateMixin {
   ///region params
-  RxBool isSearching = false.obs;
 
   late AnimationController animationController;
   late Animation<double> animation;
-
   Animation<double> get animationFloat => animation;
 
+  RxBool isSearching = false.obs;
   final AppConnectServices appConnectServices = AppConnectServices();
+  final RxBool isTryToConnectToAnotherDevice = false.obs;
+  RxBool isTryToConnect = false.obs;
+  BluetoothDevice? newDevice;
+  StreamSubscription<BluetoothStatusEnum>? readStreamSubscription;
 
   ///region Constructors
   ConnectViewModel({
@@ -35,29 +42,16 @@ class ConnectViewModel extends GetxController
   @override
   void onInit() {
     animateFloatButton();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      appConnectServices.startScan();
-    });
+    initReadStreamSubscription();
 
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {
-    appConnectServices.readStreamSubscription?.cancel();
+    readStreamSubscription?.cancel();
     FlutterBluePlus.stopScan();
     super.onClose();
-  }
-
-  @override
-  InternalFinalCallback<void> get onDelete {
-    return super.onDelete;
   }
 
   ///endregion Lifecycle
@@ -88,38 +82,63 @@ class ConnectViewModel extends GetxController
     );
   }
 
-  /// Scan bluetooth connect
-  Future<void> scanBluetoothDevices(BuildContext context) async {
-    bool check = await AppPermissionUtils().checkAll(
-      () {
-        scanBluetoothDevices(context);
-      },
-    );
-    if (check) {
-      await FlutterBluePlus.stopScan();
+  /// Init read stream
+  void initReadStreamSubscription() {
+    readStreamSubscription =
+        appConnectServices.outBluetoothState.listen((bluetoothState) {
+      /// IF connect stop scan and access to connect with another device
+      if (bluetoothState == BluetoothStatusEnum.connecting) {
+        isTryToConnectToAnotherDevice.value = true;
+        appConnectServices.isSearching.value = true;
+      }
 
-      appConnectServices.isSearching.value = true;
+      /// If connect failed show snackBar to show failed
+      if (bluetoothState == BluetoothStatusEnum.failedToConnect) {
+        Get.closeCurrentSnackbar();
+        Get.snackbar(
+          AppConstants.emptyText,
+          AppStrings.failedToConnect.tr,
+          duration: const Duration(
+            milliseconds: AppConstants.duration2000,
+          ),
+          backgroundColor: AppColors.primary,
+          colorText: AppColors.white01,
+        );
+      }
 
-      FlutterBluePlus.startScan(
-        timeout: const Duration(
-          seconds: AppConstants.duration15,
-        ),
-      ).asStream().listen((event) {});
-      stopScanTimer();
-    }
+      /// If connect done move to home feature
+      else if (bluetoothState == BluetoothStatusEnum.connected) {
+        Get.offAllNamed(
+          AppRoutes.home,
+        );
+      }
+    });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      appConnectServices.scanStream();
+    });
   }
 
-  /// Scan stop timer
-  Future<void> stopScanTimer() async {
-    if (isSearching.value) {
-      await Future.delayed(
-        const Duration(
-          seconds: AppConstants.duration15,
-        ),
-      );
+  /// Connect with device
+  Future<void> connectWithDevice(BluetoothDevice device) async {
+    isTryToConnect.value = true;
+    if (!isTryToConnectToAnotherDevice.value) {
+      isTryToConnectToAnotherDevice.value = true;
+      try {
+        await appConnectServices.connectWithDevice(
+          deviceToConnect: device,
+        );
 
-      await FlutterBluePlus.stopScan();
-      isSearching.value = false;
+        isTryToConnect.value = false;
+      } catch (e) {
+        if (e != 'already_connected') {
+          if (kDebugMode) {
+            print('already_connected');
+          }
+          rethrow;
+        }
+      } finally {
+        WidgetsBinding.instance.addPostFrameCallback((_) {});
+      }
     }
   }
 

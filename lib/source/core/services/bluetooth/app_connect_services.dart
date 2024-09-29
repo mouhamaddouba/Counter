@@ -6,7 +6,6 @@ import 'package:counter/source/core/extensions/string_extension.dart';
 import 'package:counter/source/core/services/api/errors/error_types.dart';
 import 'package:counter/source/core/services/api/network_response/response_data.dart';
 import 'package:counter/source/core/services/api/network_response/result.dart';
-import 'package:counter/source/core/themes/app_colors.dart';
 import 'package:counter/source/core/translations/app_strings.dart';
 import 'package:counter/source/core/utils/app_permission_utils.dart';
 import 'package:counter/source/core/values/constant/app_settings.dart';
@@ -123,7 +122,7 @@ class AppConnectServices
 
   void scanStream({String? deviceId}) {
     loggerExtension("searchDevice??????????????????????????????? $deviceId ");
-    // FlutterBluePlus.stopScan();
+    FlutterBluePlus.stopScan();
     _bluetoothStateStreamController.add(BluetoothStatusEnum.searching);
     for (BluetoothDevice device in FlutterBluePlus.connectedDevices) {
       _addDeviceToList(device);
@@ -160,6 +159,7 @@ class AppConnectServices
     if (check) {
       await FlutterBluePlus.stopScan();
       isSearching.value = true;
+
       await FlutterBluePlus.startScan(
         timeout: const Duration(
           seconds: AppSettings.scanDelay,

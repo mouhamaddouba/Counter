@@ -57,6 +57,7 @@ abstract class AppStrings {
   static const String unknown = 'unknown';
   static const String connect = 'connect';
   static const String retry = 'retry';
+  static const String failedToConnect = 'failedToConnect';
 
   /// Home Page
   static const String bluetoothNotEnabel = 'bluetoothNotEnabel';

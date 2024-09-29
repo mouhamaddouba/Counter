@@ -88,12 +88,6 @@ class AppPermissionUtils {
       return Future<bool>.value(false);
     }
 
-    // check = await checkCameraPermission();
-    // if (!check) {
-    //   retry();
-    //   return Future<bool>.value(false);
-    // }
-
     if (!Platform.isIOS) {
       check = await AppBluetoothUtils().checkPermissionBluetooth();
       if (!check) {
@@ -123,59 +117,4 @@ class AppPermissionUtils {
     }
     return Future<bool>.value(true);
   }
-
-  // Future<bool> checkCameraPermission() async {
-  //   if (await Permission.camera.request().isGranted) {
-  //     return Future<bool>.value(true);
-  //   } else {
-  //     var status = await Permission.camera.status;
-  //
-  //     if (AppSettings.navigatorKey.currentContext!.mounted) {
-  //       if (status.isDenied ||
-  //           status.isPermanentlyDenied ||
-  //           status.isRestricted) {
-  //         await showDialog(
-  //           context: AppSettings.navigatorKey.currentContext!,
-  //           builder: (BuildContext context) {
-  //             return CupertinoAlertDialog(
-  //               title: Text(
-  //                 AppStrings.cameraPermission.t(),
-  //               ),
-  //               content: Text(
-  //                 AppStrings.thisAppNeedsCameraAccessForQRScan.t(),
-  //               ),
-  //               actions: <Widget>[
-  //                 CupertinoDialogAction(
-  //                   child: Text(
-  //                     AppStrings.deny.t(),
-  //                     style: const TextStyle(
-  //                       color: Colors.redAccent,
-  //                     ),
-  //                   ),
-  //                   onPressed: () => Navigator.of(context).pop(),
-  //                 ),
-  //                 CupertinoDialogAction(
-  //                   child: Text(
-  //                     AppStrings.settings.t(),
-  //                   ),
-  //                   onPressed: () async {
-  //                     await openAppSettings();
-  //                     if (context.mounted) {
-  //                       Navigator.of(context).pop();
-  //                     }
-  //                   },
-  //                 ),
-  //               ],
-  //             );
-  //           },
-  //         );
-  //       }
-  //     }
-  //     if (status.isGranted) {
-  //       return Future<bool>.value(true);
-  //     }
-  //   }
-  //
-  //   return Future<bool>.value(false);
-  // }
 }

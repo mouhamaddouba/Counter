@@ -33,11 +33,13 @@ abstract class AppColors {
   static const Color darkOnPrimaryContainer = Color(0xFFdbe1ff);
   static const Color onPrimaryContainer = Color(0xFF00174b);
   static const Color containerTab = Color(0xffdbe1ff);
+
   static const Color darkContainerTab = Color(0xff234290);
   static const Color rgb = Color.fromRGBO(45, 62, 95, 1);
   static const Color darkGrey = Color(0xff525252);
   static const Color hintText = Color(0xff9F9F9F);
   static const Color borderField = Color(0xffC9C9C9);
+  static const Color dialogBackground = Color(0xffeceaea);
   static const Color white01 = Colors.white;
   static const Color iconLight = onLight300;
 }
